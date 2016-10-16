@@ -1,0 +1,22 @@
+div.calendar-cell {
+    height: 10em;
+    text-align: right;
+    margin: .5em;
+    padding: .5em;
+    position: relative;
+
+    background-color: lavender;
+}
+
+div.calendar-cell.not-this-month {
+    background-color: #f8f8Fc;
+}
+
+td.rc-calendar-disabled-cell div.calendar-cell {
+    color: lightgrey;
+    background-color: #fafaFf;
+}
+
+div.calendar-cell.today {
+    background: blue;
+}
