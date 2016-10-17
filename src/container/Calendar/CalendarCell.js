@@ -1,17 +1,24 @@
 import React, {Component} from 'react';
+
 import FloatingActionButton from 'material-ui/FloatingActionButton';
-import NavigationCheck from 'material-ui/svg-icons/navigation/check';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 import TimePicker from 'material-ui/TimePicker';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
+import {TimeRow} from './TimeRow';
+
 import api from '../../api/FirebaseApi';
+import moment from 'moment';
 
 export class CalendarCell extends Component {
 
     constructor() {
         super();
-        this.state = {open: false};
+        this.state = {
+            open: false,
+            availability: {}
+        };
     }
 
     handleChangeTimePicker = (event, time) => {
@@ -27,11 +34,22 @@ export class CalendarCell extends Component {
     };
 
     handleSave = () => {
-        api.participate(this.props.date, this.state.timeToSave)
-            .then(() => {
-                this.setState({open: false, timeToSave: null})
-            });
+        if (!this.state.timeToSave || !moment(this.state.timeToSave).isValid()) {
+            alert('Invalid date!');
+        } else {
+            api.participate(this.props.date, this.state.timeToSave)
+                .then(() => {
+                    this.setState({open: false, timeToSave: null})
+                });
+        }
     };
+
+    componentWillReceiveProps(nextProps) {
+        api.getAvailability(nextProps.date)
+            .on('value', snap => {
+                this.setState({availability: snap.val()});
+            });
+    }
 
     render() {
         const {date, today} = this.props;
@@ -47,12 +65,16 @@ export class CalendarCell extends Component {
             <FlatButton
                 label="Save"
                 primary={true}
-                keyboardFocused={true}
                 onTouchTap={this.handleSave}/>,
         ];
 
+        const availabilityComponents = Object.keys(this.state.availability || {})
+            .map(time => <TimeRow key={time} time={time}
+                                  participants={Object.keys(this.state.availability[time]).map(uuid => this.state.availability[time][uuid])}/>);
+
         return (
             <div
+                style={{}}
                 className={`calendar-cell ${date.diff(today, 'days') === 0 ? 'today' : ''} ${!isThisMonth ? 'not-this-month' : ''}`}>
                 <span>{date.format('D')}</span>
 
@@ -61,7 +83,7 @@ export class CalendarCell extends Component {
                         mini={true}
                         style={{position: 'absolute', bottom: '.5em', right: '.5em'}}
                         onMouseUp={this.handleOpen}>
-                        <NavigationCheck />
+                        <ContentAdd />
                     </FloatingActionButton> : null}
 
                 <Dialog
@@ -76,6 +98,8 @@ export class CalendarCell extends Component {
                         hintText="Select the time"
                         onChange={this.handleChangeTimePicker}/>
                 </Dialog>
+
+                {availabilityComponents}
             </div>
         )
     }

@@ -1,9 +1,16 @@
+div.calendar-cell span {
+    text-align: right;
+    position: absolute;
+    right: .5em;
+    top: .5em;
+}
+
 div.calendar-cell {
     height: 10em;
-    text-align: right;
     margin: .5em;
     padding: .5em;
     position: relative;
+    overflow: hidden;
 
     background-color: lavender;
 }
@@ -18,5 +25,18 @@ td.rc-calendar-disabled-cell div.calendar-cell {
 }
 
 div.calendar-cell.today {
-    background: blue;
+    background: #c0c0d4;
+}
+
+div.calendar-cell div.time-row {
+    display: flex;
+    margin: .25em;
+}
+div.calendar-cell div.time-row > div {
+    height: 1.5em;
+    width: 1.5em;
+    margin: 0 .25em;
+    text-align: center;
+    display: inline-block;
+    overflow: hidden;
 }

@@ -24,11 +24,22 @@ class FirebaseApi {
         return firebase.auth().signInWithPopup(this.authProvider);
     }
 
+    get availability() {
+        return this.dbRef.child('availability')
+    }
+
     participate(date, time) {
         var updates = {};
-        updates[`/${moment(date).format('DD_MM_YYYY')}/${moment(time).format('HH:mm')}/${this.auth.currentUser.uid}`] = true;
+        updates[`/${moment(date).format('DD_MM_YYYY')}/${moment(time).format('HH:mm')}/${this.auth.currentUser.uid}`] = {
+            photo: this.auth.currentUser.photoURL,
+            name: this.auth.currentUser.displayName
+        };
 
-        return this.dbRef.child('availability').update(updates);
+        return this.availability.update(updates);
+    }
+
+    getAvailability(date) {
+        return this.availability.child(moment(date).format('DD_MM_YYYY'));
     }
 }
 
