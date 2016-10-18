@@ -36,7 +36,7 @@ export class Frame extends Component {
             <MenuItem key="logout" onTouchTap={() => this.logout()}>Logout</MenuItem>];
 
         return (
-            <div>
+            <div style={{flex:1}}>
                 <AppBar
                     title="Football manager"
                     iconClassNameRight="muidocs-icon-navigation-expand-more"

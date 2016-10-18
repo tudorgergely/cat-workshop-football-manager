@@ -10,6 +10,6 @@ export const TimeRow = ({time, participants}) =>
     <div className="time-row">
         {time}: {participants.map((participant, i) =>
         <Paper key={i} zDepth={1} circle={true}>
-            <img style={imgStyle} src={participant.photo} alt={participant.name}/>
+            <img style={imgStyle} src={participant.participant.photo} alt={participant.participant.name} title={participant.participant.name}/>
         </Paper>)}
     </div>;

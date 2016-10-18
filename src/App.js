@@ -14,7 +14,6 @@ import firebaseApi from './api/FirebaseApi';
 class App extends Component {
     componentDidMount() {
         firebaseApi.auth.onAuthStateChanged(firebaseUser => {
-            console.debug('current user', firebaseUser);
             if (!!firebaseUser) {
                 browserHistory.push('/calendar');
             } else {
@@ -25,11 +24,13 @@ class App extends Component {
 
     render() {
         return (
-            <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
-                <Frame>
-                    {this.props.children}
-                </Frame>
-            </MuiThemeProvider>
+            <div style={{display:'flex'}}>
+                <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
+                    <Frame>
+                        {this.props.children}
+                    </Frame>
+                </MuiThemeProvider>
+            </div>
         );
     }
 }

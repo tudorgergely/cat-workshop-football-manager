@@ -7,18 +7,18 @@ import api from '../../api/FirebaseApi';
 export class Login extends Component {
 
     loginWithGoogle() {
-        api.googleAuthPopup().then(null, (error) => {
-            console.log(error);
-        });
+        api.googleAuthPopup().catch(console.log.bind(console));
     }
 
     render() {
         return (
-            <FlatButton
-                label="Login with Google"
-                icon={<FontIcon className="fa fa-google"/>}
-                onClick={this.loginWithGoogle}
-            />
+            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                <FlatButton
+                    label="Login with Google"
+                    icon={<FontIcon className="fa fa-google"/>}
+                    onClick={this.loginWithGoogle}
+                />
+            </div>
         );
     }
 }

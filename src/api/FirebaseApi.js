@@ -25,7 +25,7 @@ class FirebaseApi {
     }
 
     get availability() {
-        return this.dbRef.child('availability')
+        return this.dbRef.child('football')
     }
 
     participate(date, time) {

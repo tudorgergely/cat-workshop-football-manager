@@ -32,6 +32,7 @@ div.calendar-cell div.time-row {
     display: flex;
     margin: .25em;
 }
+
 div.calendar-cell div.time-row > div {
     height: 1.5em;
     width: 1.5em;
