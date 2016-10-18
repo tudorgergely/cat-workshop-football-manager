@@ -1,0 +1,43 @@
+div.calendar-cell span {
+    text-align: right;
+    position: absolute;
+    right: .5em;
+    top: .5em;
+}
+
+div.calendar-cell {
+    height: 10em;
+    margin: .5em;
+    padding: .5em;
+    position: relative;
+    overflow: hidden;
+
+    background-color: lavender;
+}
+
+div.calendar-cell.not-this-month {
+    background-color: #f8f8Fc;
+}
+
+td.rc-calendar-disabled-cell div.calendar-cell {
+    color: lightgrey;
+    background-color: #fafaFf;
+}
+
+div.calendar-cell.today {
+    background: #c0c0d4;
+}
+
+div.calendar-cell div.time-row {
+    display: flex;
+    margin: .25em;
+}
+
+div.calendar-cell div.time-row > div {
+    height: 1.5em;
+    width: 1.5em;
+    margin: 0 .25em;
+    text-align: center;
+    display: inline-block;
+    overflow: hidden;
+}
