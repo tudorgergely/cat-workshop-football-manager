@@ -29,13 +29,22 @@ class FirebaseApi {
     }
 
     participate(date, time) {
-        var updates = {};
+        let updates = {};
         updates[`/${moment(date).format('DD_MM_YYYY')}/${moment(time).format('HH:mm')}/${this.auth.currentUser.uid}`] = {
             photo: this.auth.currentUser.photoURL,
             name: this.auth.currentUser.displayName
         };
 
         return this.availability.update(updates);
+    }
+
+    unparticipate(id, date, time) {
+        if(this.auth.currentUser.uid === id) {
+            return this.getAvailability(date).child(time).child(id).remove();
+            // let updates = {};
+            // updates[`/${moment(date).format('DD_MM_YYYY')}/${moment(time).format('HH:mm')}/${this.auth.currentUser.uid}`] = null;
+            // return this.availability.update(updates);
+        }
     }
 
     getAvailability(date) {

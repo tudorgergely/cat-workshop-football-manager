@@ -33,7 +33,7 @@ div.calendar-cell div.time-row {
     margin: .25em;
 }
 
-div.calendar-cell div.time-row > div {
+ div.time-row > div {
     height: 1.5em;
     width: 1.5em;
     margin: 0 .25em;
