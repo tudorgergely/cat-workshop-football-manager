@@ -1,0 +1,10 @@
+div.login-container {
+    display: flex;
+    justify-content: space-around;
+
+    flex: 1;
+}
+
+div.login-container > button {
+    align-self: center;
+}

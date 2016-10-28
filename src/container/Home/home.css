@@ -1,0 +1,22 @@
+div.home {
+    text-align: center;
+}
+
+div.home div.flex-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    text-align: left;
+}
+
+div.home div.flex-wrapper > div {
+    width: 300px;
+    cursor: pointer;
+
+    transition: transform 200ms cubic-bezier(.4, 0, .2, 1);
+}
+
+div.home div.flex-wrapper > div:hover {
+    transform: scale(1.1);
+}

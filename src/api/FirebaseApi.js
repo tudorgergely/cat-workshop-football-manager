@@ -24,31 +24,28 @@ class FirebaseApi {
         return firebase.auth().signInWithPopup(this.authProvider);
     }
 
-    get availability() {
-        return this.dbRef.child('football')
+    availability(moduleId) {
+        return this.dbRef.child(moduleId)
     }
 
-    participate(date, time) {
+    participate(moduleId, date, time) {
         let updates = {};
         updates[`/${moment(date).format('DD_MM_YYYY')}/${moment(time).format('HH:mm')}/${this.auth.currentUser.uid}`] = {
             photo: this.auth.currentUser.photoURL,
             name: this.auth.currentUser.displayName
         };
 
-        return this.availability.update(updates);
+        return this.availability(moduleId).update(updates);
     }
 
-    unparticipate(id, date, time) {
-        if(this.auth.currentUser.uid === id) {
-            return this.getAvailability(date).child(time).child(id).remove();
-            // let updates = {};
-            // updates[`/${moment(date).format('DD_MM_YYYY')}/${moment(time).format('HH:mm')}/${this.auth.currentUser.uid}`] = null;
-            // return this.availability.update(updates);
+    unparticipate(moduleId, id, date, time) {
+        if (this.auth.currentUser.uid === id) {
+            return this.getAvailability(moduleId, date).child(time).child(id).remove();
         }
     }
 
-    getAvailability(date) {
-        return this.availability.child(moment(date).format('DD_MM_YYYY'));
+    getAvailability(moduleId, date) {
+        return this.availability(moduleId).child(moment(date).format('DD_MM_YYYY'));
     }
 }
 

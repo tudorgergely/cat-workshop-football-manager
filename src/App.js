@@ -4,14 +4,14 @@ import {browserHistory} from 'react-router';
 import {MuiThemeProvider} from 'material-ui';
 import {getMuiTheme, lightBaseTheme} from 'material-ui/styles';
 
+import {Frame} from './container/Frame/Frame';
+
 import api from './api/FirebaseApi';
 
 class App extends Component {
     componentDidMount() {
         api.auth.onAuthStateChanged(firebaseUser => {
-            if(!!firebaseUser) {
-                browserHistory.push('/home');
-            } else {
+            if (!firebaseUser) {
                 browserHistory.push('/login');
             }
         })
@@ -20,7 +20,9 @@ class App extends Component {
     render() {
         return (
             <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
-                {this.props.children}
+                <Frame>
+                    {this.props.children }
+                </Frame>
             </MuiThemeProvider>
         );
     }

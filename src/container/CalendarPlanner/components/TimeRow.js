@@ -15,11 +15,10 @@ export function TimeRow(props) {
             return <Paper
                 key={i}
                 circle={true}
-                onClick={() => onItemClicked(p.id, timeRow.time)}
-                onMouseOver={() => onItemHovered(p.id, timeRow.time)}
-            >
-                <img style={imgStyle} src={p.photo} title={p.name}/>
-                <img style={imgStyle} src={p.photo} title={p.name}/> // x
+                onClick={() => onItemClicked && onItemClicked(p.id, timeRow.time)}
+                onMouseOver={() => onItemHovered && onItemHovered(p.id, timeRow.time)}>
+
+                <img style={imgStyle} src={p.photo} title={p.name} alt={p.name}/>
             </Paper>
         })
         }</div>
